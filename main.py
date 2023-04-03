@@ -1,9 +1,3 @@
-# Shut The Box Game. Numbers 1 through 9 are displayed individually. The player will roll 2 6-sided dice.
-# Then the player will pick numbers to flip that add up to the total number rolled by the dice.
-# If the total of the numbers displayed is less than 6, roll only one die.
-# Once the player cannot "flip" any numbers the remaining numbers determine their score.
-# Low score wins.
-
 import random
 import os
 
@@ -22,22 +16,31 @@ while play_again:
 
         # Roll Dice
         while players_turn:
+            current_player = player + 1
             print(the_box)
-            die1 = random.randint(1, 6)
-            die2 = random.randint(1, 6)
-            print(f'Die 1 is {die1}.')
-            print(f'Die 2 is {die2}.')
+            tile_sum = 0
+            for tile in the_box:
+                tile_int = int(tile)
+                tile_sum += tile_int
+            if tile_sum < 7:
+                die1 = random.randint(1, 6)
+                print(f'Die 1 is {die1}.')
+            else:
+                die1 = random.randint(1, 6)
+                die2 = random.randint(1, 6)
+                print(f'Die 1 is {die1}.')
+                print(f'Die 2 is {die2}.')
 
             # Pick Numbers to "flip"
-            flip_string = input('Which numbers do you wish to flip? (separate with ","). If you cannot remove anything /'
-                                'type "none": ').replace(' ', '')
+            flip_string = input('Which numbers do you wish to flip? (separate with ","). If you cannot remove/'
+                                'anything type "none": ').replace(' ', '')
             if flip_string == 'none':
                 # Display score.
                 try:
                     score = int(''.join(the_box))
                     score_list.append(score)
                     os.system('clear')
-                    print(f'Your score is {score}\nNext player')
+                    print(f'Player {current_player} score is {score}')
                     players_turn = False
                 except ValueError:
                     os.system('clear')
@@ -62,10 +65,9 @@ while play_again:
         if player_score < best_score:
             best_score = player_score
     winner = score_list.index(best_score) + 1
-    print(f'The winner is player {winner}!')
+    print(f'The winner is player {winner}, with a score of {best_score}!')
     response = input('Do you want to play again? (y/n): ')
     if response.lower() == 'y':
         play_again = True
     else:
         play_again = False
-

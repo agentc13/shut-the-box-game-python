@@ -24,7 +24,9 @@ while play_again:
             for tile in the_box:
                 tile_int = int(tile)
                 tile_sum += tile_int
-            if tile_sum < 7:
+            if tile_sum == 0:
+                os.system('clear')
+            elif tile_sum < 7:
                 die1 = random.randint(1, 6)
                 print(die_faces.dice_art[die1 - 1])
             else:
@@ -62,6 +64,7 @@ while play_again:
                 os.system('clear')
 
     # Compare scores and declare the winner.
+    print(score_list)
     for player_score in score_list:
         if player_score < best_score:
             best_score = player_score

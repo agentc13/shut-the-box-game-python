@@ -1,5 +1,7 @@
 import random
 import os
+import die_faces
+
 
 play_again = True
 
@@ -24,12 +26,11 @@ while play_again:
                 tile_sum += tile_int
             if tile_sum < 7:
                 die1 = random.randint(1, 6)
-                print(f'Die 1 is {die1}.')
+                print(die_faces.dice_art[die1 - 1])
             else:
                 die1 = random.randint(1, 6)
                 die2 = random.randint(1, 6)
-                print(f'Die 1 is {die1}.')
-                print(f'Die 2 is {die2}.')
+                print(die_faces.dice_art[die1 - 1] + die_faces.dice_art[die2 - 1])
 
             # Pick Numbers to "flip"
             flip_string = input('Which numbers do you wish to flip? (separate with ","). If you cannot remove/'
